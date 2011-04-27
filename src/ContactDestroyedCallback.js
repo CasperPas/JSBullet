@@ -21,7 +21,7 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-package com.bulletphysics;
+//package com.bulletphysics;
 
 /**
  * Called when contact has been destroyed between two collision objects.
@@ -29,8 +29,9 @@ package com.bulletphysics;
  * @see BulletGlobals#setContactDestroyedCallback
  * @author jezek2
  */
-public abstract class ContactDestroyedCallback {
+var ContactDestroyedCallback = new Class({
 
-	public abstract boolean contactDestroyed(Object userPersistentData);
+	//contactDestroyed: function(Object userPersistentData);
+	contactDestroyed: function(userPersistentData){}
 	
-}
+});

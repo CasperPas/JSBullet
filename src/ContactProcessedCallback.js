@@ -20,19 +20,20 @@
  *    misrepresented as being the original software.
  * 3. This notice may not be removed or altered from any source distribution.
  */
-
+/*
 package com.bulletphysics;
 
 import com.bulletphysics.collision.narrowphase.ManifoldPoint;
-
+*/
 /**
  * Called when existing contact between two collision objects has been processed.
  * 
  * @see BulletGlobals#setContactProcessedCallback
  * @author jezek2
  */
-public abstract class ContactProcessedCallback {
+var ContactProcessedCallback = new Class({
 	
-	public abstract boolean contactProcessed(ManifoldPoint cp, Object body0, Object body1);
+	//boolean contactProcessed(ManifoldPoint cp, Object body0, Object body1);
+	contactProcessed: function(cp, body0, body1);
 
-}
+});

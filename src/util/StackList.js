@@ -21,7 +21,7 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-package com.bulletphysics.util;
+//package com.bulletphysics.util;
 
 /**
  * Stack-based object pool, see the example for usage. You must use the {@link #returning}
@@ -46,40 +46,39 @@ package com.bulletphysics.util;
  * 
  * @author jezek2
  */
-public abstract class StackList<T> {
-
-	private final ObjectArrayList<T> list = new ObjectArrayList<T>();
-	private T returnObj;
+var StackList = new Class({
 	
-	private int[] stack = new int[512];
-	private int stackCount = 0;
+	list: null,
+	returnObj: null,
 	
-	private int pos = 0;
+	stack: null,
+	stackCount: 0,
 	
-	public StackList() {
-		returnObj = create();
-	}
+	pos: 0,
 	
-	protected StackList(boolean unused) {
-	}
+	initialize: function(unused){
+		this.list = new ObjectArrayList();
+		this.stack = new Array();
+		this.returnObj = this.create();
+	},
 	
 	/**
 	 * Pushes the stack.
 	 */
-	public final void push() {
+	push: function() {
 		/*if (stackCount == stack.length-1) {
 			resizeStack();
 		}*/
 		
-		stack[stackCount++] = pos;
-	}
+		this.stack[this.stackCount++] = pos;
+	},
 
 	/**
 	 * Pops the stack.
 	 */
-	public final void pop() {
-		pos = stack[--stackCount];
-	}
+	pop: function() {
+		this.pos = this.stack[--this.stackCount];
+	},
 	
 	/**
 	 * Returns instance from stack pool, or create one if not present. The returned
@@ -87,15 +86,15 @@ public abstract class StackList<T> {
 	 * 
 	 * @return instance
 	 */
-	public T get() {
+	get: function() {
 		//if (true) return create();
 		
-		if (pos == list.size()) {
-			expand();
+		if (this.pos == this.list.length) {
+			this.expand();
 		}
 		
-		return list.getQuick(pos++);
-	}
+		return this.list[this.pos++];
+	},
 	
 	/**
 	 * Copies given instance into one slot static instance and returns it. It's
@@ -105,19 +104,21 @@ public abstract class StackList<T> {
 	 * @param obj stack-allocated instance
 	 * @return one slot instance for returning purposes
 	 */
-	public final T returning(T obj) {
+	returning: function(obj) {
 		//if (true) { T ret = create(); copy(ret, obj); return ret; }
 		
-		copy(returnObj, obj);
-		return returnObj;
-	}
+		this.copy(this.returnObj, obj);
+		return this.returnObj;
+	},
 	
 	/**
 	 * Creates a new instance of type.
 	 * 
 	 * @return instance
 	 */
-	protected abstract T create();
+	create: function(){
+		return {};
+	},
 	
 	/**
 	 * Copies data from one instance to another.
@@ -125,10 +126,12 @@ public abstract class StackList<T> {
 	 * @param dest
 	 * @param src
 	 */
-	protected abstract void copy(T dest, T src);
+	copy: function(dest, src){
+		dest = src;
+	},
 
-	private void expand() {
-		list.add(create());
+	expand: function() {
+		this.list.push(this.create());
 	}
 	
-}
+});

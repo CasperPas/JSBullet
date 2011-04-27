@@ -20,68 +20,68 @@
  *    misrepresented as being the original software.
  * 3. This notice may not be removed or altered from any source distribution.
  */
-
+/*
 package com.bulletphysics;
 
 import com.bulletphysics.linearmath.CProfileManager;
 import com.bulletphysics.linearmath.Clock;
 import javax.vecmath.Vector3f;
-
+*/
 /**
  * Bullet statistics and profile support.
  * 
  * @author jezek2
  */
-public class BulletStats {
+var BulletStats = new Class({
 	
-	public static int gTotalContactPoints;
+	gTotalContactPoints: 0,
 	
 	// GjkPairDetector
 	// temp globals, to improve GJK/EPA/penetration calculations
-	public static int gNumDeepPenetrationChecks = 0;
-	public static int gNumGjkChecks = 0;
-	public static int gNumSplitImpulseRecoveries = 0;
+	gNumDeepPenetrationChecks: 0,
+	gNumGjkChecks: 0,
+	gNumSplitImpulseRecoveries: 0,
 	
-	public static int gNumAlignedAllocs;
-	public static int gNumAlignedFree;
-	public static int gTotalBytesAlignedAllocs;	
+	gNumAlignedAllocs: 0,
+	gNumAlignedFree: 0,
+	gTotalBytesAlignedAllocs: 0,
 	
-	public static int gPickingConstraintId = 0;
-	public static final Vector3f gOldPickingPos = new Vector3f();
-	public static float gOldPickingDist = 0.f;
+	gPickingConstraintId: 0,
+	gOldPickingPos: new Vector3f(),
+	gOldPickingDist: 0.f,
 	
-	public static int gOverlappingPairs = 0;
-	public static int gRemovePairs = 0;
-	public static int gAddedPairs = 0;
-	public static int gFindPairs = 0;
+	gOverlappingPairs: 0,
+	gRemovePairs: 0,
+	gAddedPairs: 0,
+	gFindPairs: 0,
 	
-	public static final Clock gProfileClock = new Clock();
+	gProfileClock: new Clock(),
 
 	// DiscreteDynamicsWorld:
-	public static int gNumClampedCcdMotions = 0;
+	gNumClampedCcdMotions: 0,
 
 	// JAVA NOTE: added for statistics in applet demo
-	public static long stepSimulationTime;
-	public static long updateTime;
+	stepSimulationTime: 1/60,
+	updateTime: 0,
 	
-	private static boolean enableProfile = false;
+	enableProfile: false,
 	
 	////////////////////////////////////////////////////////////////////////////
 	
-	public static boolean isProfileEnabled() {
-		return enableProfile;
+	isProfileEnabled: function() {
+		return this.enableProfile;
 	}
 
-	public static void setProfileEnabled(boolean b) {
-		enableProfile = b;
+	setProfileEnabled: function(b) {
+		this.enableProfile = b;
 	}
 	
-	public static long profileGetTicks() {
-		long ticks = gProfileClock.getTimeMicroseconds();
+	profileGetTicks: function() {
+		ticks = this.gProfileClock.getTimeMicroseconds();
 		return ticks;
 	}
 
-	public static float profileGetTickRate() {
+	profileGetTickRate: function() {
 		//return 1000000f;
 		return 1000f;
 	}
@@ -91,8 +91,8 @@ public class BulletStats {
 	 * 
 	 * @param name must be {@link String#intern interned} String (not needed for String literals)
 	 */
-	public static void pushProfile(String name) {
-		if (enableProfile) {
+	pushProfile: function(name) {
+		if (this.enableProfile) {
 			CProfileManager.startProfile(name);
 		}
 	}
@@ -100,10 +100,10 @@ public class BulletStats {
 	/**
 	 * Pops profile node.
 	 */
-	public static void popProfile() {
-		if (enableProfile) {
+	popProfile: function() {
+		if (this.enableProfile) {
 			CProfileManager.stopProfile();
 		}
 	}
 	
-}
+});

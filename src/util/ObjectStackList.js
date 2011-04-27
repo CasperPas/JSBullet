@@ -28,31 +28,10 @@ package com.bulletphysics.util;
  * 
  * @author jezek2
  */
-public class ObjectStackList<T> extends StackList<T> {
-
-	private Class<T> cls;
+var ObjectStackList = new Class({
+	Extends: StackList,
 	
-	public ObjectStackList(Class<T> cls) {
-		super(false);
-		this.cls = cls;
+	initialize: function() {
+		this.parent(false);
 	}
-
-	@Override
-	protected T create() {
-		try {
-			return cls.newInstance();
-		}
-		catch (InstantiationException e) {
-			throw new IllegalStateException(e);
-		}
-		catch (IllegalAccessException e) {
-			throw new IllegalStateException(e);
-		}
-	}
-
-	@Override
-	protected void copy(T dest, T src) {
-		throw new UnsupportedOperationException();
-	}
-	
-}
+});

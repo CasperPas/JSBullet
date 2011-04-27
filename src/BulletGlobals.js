@@ -20,111 +20,111 @@
  *    misrepresented as being the original software.
  * 3. This notice may not be removed or altered from any source distribution.
  */
-
+/*
 package com.bulletphysics;
 
 import com.bulletphysics.util.ArrayPool;
 import com.bulletphysics.util.ObjectPool;
-import cz.advel.stack.Stack;
+*/
 
-/**
- * Bullet global settings and constants.
- * 
- * @author jezek2
- */
-public class BulletGlobals {
+var Float = {};
+Float.MAX_VALUE = 999999999999999;
+
+var BulletGlobals = new Class({
 	
-	public static final boolean DEBUG = false;
+	DEBUG: false,
 	
-	public static final float CONVEX_DISTANCE_MARGIN = 0.04f;
-	public static final float FLT_EPSILON = 1.19209290e-07f;
-	public static final float SIMD_EPSILON = FLT_EPSILON;
+	CONVEX_DISTANCE_MARGIN: 	0.04f,
+	FLT_EPSILON: 				1.19209290e-07f,
+	SIMD_EPSILON: 				FLT_EPSILON,
 	
-	public static final float SIMD_2_PI = 6.283185307179586232f;
-	public static final float SIMD_PI = SIMD_2_PI * 0.5f;
-	public static final float SIMD_HALF_PI = SIMD_2_PI * 0.25f;
-	public static final float SIMD_RADS_PER_DEG = SIMD_2_PI / 360f;
-	public static final float SIMD_DEGS_PER_RAD = 360f / SIMD_2_PI;
-	public static final float SIMD_INFINITY = Float.MAX_VALUE;
+	SIMD_2_PI: 					6.283185307179586232f,
+	SIMD_PI: 					SIMD_2_PI * 0.5f,
+	SIMD_HALF_PI: 				SIMD_2_PI * 0.25f,
+	SIMD_RADS_PER_DEG: 			SIMD_2_PI / 360f,
+	SIMD_DEGS_PER_RAD: 			360f / SIMD_2_PI,
+	SIMD_INFINITY: 				Float.MAX_VALUE,
+	contactBreakingThreshold: 	0.02f,
 
-	////////////////////////////////////////////////////////////////////////////
-
-	private static ThreadLocal<BulletGlobals> threadLocal = new ThreadLocal<BulletGlobals>() {
-		@Override
-		protected BulletGlobals initialValue() {
-			return new BulletGlobals();
-		}
-	};
-
-	private ContactDestroyedCallback gContactDestroyedCallback;
-	private ContactAddedCallback gContactAddedCallback;
-	private ContactProcessedCallback gContactProcessedCallback;
-
-	private float contactBreakingThreshold = 0.02f;
+	
 	// RigidBody
-	private float deactivationTime = 2f;
-	private boolean disableDeactivation = false;
+	deactivationTime: 2f,
+	disableDeactivation: false,
+	////////////////////////////////////////////////////////////////////////////
+
+	initialize: function(){
+		
+	},
+
+	gContactDestroyedCallback: $empty,
 	
-	public static ContactAddedCallback getContactAddedCallback() {
-		return threadLocal.get().gContactAddedCallback;
-	}
+	gContactAddedCallback: $empty,
+	
+	gContactProcessedCallback: $empty,
 
-	public static void setContactAddedCallback(ContactAddedCallback callback) {
-		threadLocal.get().gContactAddedCallback = callback;
-	}
+	
+	getContactAddedCallback: function() {
+		return this.gContactAddedCallback;
+	},
 
-	public static ContactDestroyedCallback getContactDestroyedCallback() {
-		return threadLocal.get().gContactDestroyedCallback;
-	}
+	setContactAddedCallback: function(callback) {
+		this.gContactAddedCallback = callback;
+	},
 
-	public static void setContactDestroyedCallback(ContactDestroyedCallback callback) {
-		threadLocal.get().gContactDestroyedCallback = callback;
-	}
+	getContactDestroyedCallback: function() {
+		return this.gContactDestroyedCallback;
+	},
 
-	public static ContactProcessedCallback getContactProcessedCallback() {
-		return threadLocal.get().gContactProcessedCallback;
-	}
+	setContactDestroyedCallback: function(callback) {
+		this.gContactDestroyedCallback = callback;
+	},
 
-	public static void setContactProcessedCallback(ContactProcessedCallback callback) {
-		threadLocal.get().gContactProcessedCallback = callback;
-	}
+	getContactProcessedCallback: function() {
+		return this.gContactProcessedCallback;
+	},
+
+	setContactProcessedCallback: function(callback) {
+		this.gContactProcessedCallback = callback;
+	},
 	
 	////////////////////////////////////////////////////////////////////////////
 
-	public static float getContactBreakingThreshold() {
-		return threadLocal.get().contactBreakingThreshold;
-	}
+	getContactBreakingThreshold: function() {
+		return this.contactBreakingThreshold;
+	},
 
-	public static void setContactBreakingThreshold(float threshold) {
-		threadLocal.get().contactBreakingThreshold = threshold;
-	}
+	setContactBreakingThreshold: function(threshold) {
+		this.contactBreakingThreshold = threshold;
+	},
 
-	public static float getDeactivationTime() {
-		return threadLocal.get().deactivationTime;
-	}
+	getDeactivationTime: function() {
+		return this.deactivationTime;
+	},
 
-	public static void setDeactivationTime(float time) {
-		threadLocal.get().deactivationTime = time;
-	}
+	setDeactivationTime: function(time) {
+		this.deactivationTime = time;
+	},
 
-	public static boolean isDeactivationDisabled() {
-		return threadLocal.get().disableDeactivation;
-	}
+	isDeactivationDisabled: function() {
+		return this.disableDeactivation;
+	},
 
-	public static void setDeactivationDisabled(boolean disable) {
-		threadLocal.get().disableDeactivation = disable;
-	}
+	setDeactivationDisabled: function(disable) {
+		this.disableDeactivation = disable;
+	},
 
 	////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * Cleans all current thread specific settings and caches.
 	 */
-	public static void cleanCurrentThread() {
+	cleanCurrentThread: function() {
+		/*
 		threadLocal.remove();
 		Stack.libraryCleanCurrentThread();
 		ObjectPool.cleanCurrentThread();
 		ArrayPool.cleanCurrentThread();
+		*/
 	}
 
-}
+});
